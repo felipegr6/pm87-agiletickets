@@ -74,7 +74,7 @@ public class EspetaculosController {
 	 */
 	@Post("/espetaculos")
 	public void adiciona(@Valid Espetaculo espetaculo) {
-		
+
 		validator.onErrorRedirectTo(this).lista();
 
 		agenda.cadastra(espetaculo);
@@ -162,20 +162,20 @@ public class EspetaculosController {
 				+ CURRENCY.format(precoTotal));
 
 		result.redirectTo(IndexController.class).index();
+
 	}
 
 	private Espetaculo carregaEspetaculo(Long espetaculoId) {
-		Espetaculo espetaculo = agenda.espetaculo(espetaculoId);
-		if (espetaculo == null) {
-			validator.add(new SimpleMessage("", ""));
-		}
-		validator.onErrorUse(status()).notFound();
-		return espetaculo;
-	}
 
-	// metodo antigo. aqui soh por backup
-	private Estabelecimento criaEstabelecimento(Long id) {
-		return estabelecimentos.todos().get(0);
+		Espetaculo espetaculo = agenda.espetaculo(espetaculoId);
+
+		if (espetaculo == null)
+			validator.add(new SimpleMessage("", ""));
+
+		validator.onErrorUse(status()).notFound();
+
+		return espetaculo;
+
 	}
 
 }
