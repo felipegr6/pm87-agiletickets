@@ -17,4 +17,5 @@ public class Reserva {
 
 	@ManyToOne
 	private Espetaculo espetaculo;
+
 }

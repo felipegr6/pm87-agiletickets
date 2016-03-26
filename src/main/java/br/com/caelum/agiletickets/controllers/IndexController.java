@@ -12,8 +12,8 @@ public class IndexController {
 
 	private Result result;
 	private Agenda agenda;
-	
-	/** @deprecated CDI eyes only*/
+
+	/** @deprecated CDI eyes only */
 	protected IndexController() {
 	}
 
@@ -27,5 +27,5 @@ public class IndexController {
 	public void index() {
 		result.include("sessoes", agenda.proximasSessoes(10));
 	}
-	
+
 }
