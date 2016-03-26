@@ -74,7 +74,7 @@ public class EspetaculosController {
 	 */
 	@Post("/espetaculos")
 	public void adiciona(@Valid Espetaculo espetaculo) {
-
+		
 		validator.onErrorRedirectTo(this).lista();
 
 		agenda.cadastra(espetaculo);
