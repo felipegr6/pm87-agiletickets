@@ -32,33 +32,38 @@ public class EspetaculosControllerTest {
 	private @Mock DiretorioDeEstabelecimentos estabelecimentos;
 	private @Spy Validator validator = new MockValidator();
 	private @Spy Result result = new MockResult();
-	
+
 	private EspetaculosController controller;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new EspetaculosController(result, validator, agenda, estabelecimentos);
+		controller = new EspetaculosController(result, validator, agenda,
+				estabelecimentos);
 	}
 
-	@Test(expected=ValidationException.class)
+	@Test(expected = ValidationException.class)
 	public void naoDeveCadastrarEspetaculosSemNome() throws Exception {
+
 		Espetaculo espetaculo = new Espetaculo();
 		espetaculo.setDescricao("uma descricao");
 
 		controller.adiciona(espetaculo);
 
 		verifyZeroInteractions(agenda);
+
 	}
 
-	@Test(expected=ValidationException.class)
+	@Test(expected = ValidationException.class)
 	public void naoDeveCadastrarEspetaculosSemDescricao() throws Exception {
+
 		Espetaculo espetaculo = new Espetaculo();
 		espetaculo.setNome("um nome");
 
 		controller.adiciona(espetaculo);
 
 		verifyZeroInteractions(agenda);
+
 	}
 
 	@Test
@@ -71,7 +76,7 @@ public class EspetaculosControllerTest {
 
 		verify(agenda).cadastra(espetaculo);
 	}
-	
+
 	@Test
 	public void deveRetornarNotFoundSeASessaoNaoExiste() throws Exception {
 		when(agenda.sessao(1234l)).thenReturn(null);
@@ -81,7 +86,7 @@ public class EspetaculosControllerTest {
 		verify(result).notFound();
 	}
 
-	@Test(expected=ValidationException.class)
+	@Test(expected = ValidationException.class)
 	public void naoDeveReservarZeroIngressos() throws Exception {
 		when(agenda.sessao(1234l)).thenReturn(new Sessao());
 
@@ -90,8 +95,9 @@ public class EspetaculosControllerTest {
 		verifyZeroInteractions(result);
 	}
 
-	@Test(expected=ValidationException.class)
-	public void naoDeveReservarMaisIngressosQueASessaoPermite() throws Exception {
+	@Test(expected = ValidationException.class)
+	public void naoDeveReservarMaisIngressosQueASessaoPermite()
+			throws Exception {
 		Sessao sessao = new Sessao();
 		sessao.setTotalIngressos(3);
 
