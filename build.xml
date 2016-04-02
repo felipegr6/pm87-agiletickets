@@ -72,6 +72,7 @@
 				<fileset dir="${test.src.dir}">
 					<include name="**/*Test.java" />
 					<exclude name="**/EstabelecimentoTest.java" />
+					<exclude name="**/EspetaculosControllerTest.java" />
 				</fileset>
 			</batchtest>
 			<formatter type="brief" usefile="false" />
